@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="政务录音数据统计报告，包含录音师、部署类型与补录/全新拆分。">
+  <title>2026年政企部录音需求统计</title>
+  <style>
+    :root{color-scheme:light;--ink:#1c2926;--muted:#63716c;--line:#dce4e0;--green:#315b52;--green-soft:#edf4f1;--paper:#fff;--bg:#f3f6f4;--accent:#187a72}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif}
+    main{max-width:1180px;margin:0 auto;padding:34px 30px 54px}
+    header{border-bottom:1px solid var(--line);padding:5px 0 24px;margin-bottom:24px}
+    .eyebrow{margin:0 0 7px;color:var(--accent);font-size:12px;font-weight:700}
+    h1{margin:0;font-size:28px;line-height:1.25;font-weight:700}
+    .intro{max-width:840px;color:#52615b;margin:12px 0 0;font-size:14px}
+    .overview{display:flex;gap:34px;align-items:baseline;flex-wrap:wrap;padding:17px 0;border-bottom:1px solid var(--line)}
+    .metric{display:flex;gap:9px;align-items:baseline}
+    .metric strong{font-size:22px;font-variant-numeric:tabular-nums}
+    .metric span{font-size:13px;color:var(--muted)}
+    section{padding-top:30px}
+    .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:14px}
+    h2{font-size:19px;margin:0;font-weight:700}
+    .section-note{color:var(--muted);font-size:12px;margin:0}
+    h3{font-size:15px;margin:0 0 11px}
+    .grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:24px;align-items:start}
+    .panel{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:18px 20px}
+    .chart{margin:0}
+    .chart figcaption{font-weight:650;font-size:14px;margin-bottom:10px}
+    .chart-body{display:flex;align-items:center;gap:15px}
+    .chart svg{width:min(50%,230px);height:auto;flex:0 0 auto}
+    .pie-label{fill:#fff;text-anchor:middle;font-size:9px;font-weight:700;paint-order:stroke;stroke:rgba(0,0,0,.22);stroke-width:1.5px;stroke-linejoin:round;pointer-events:none}
+    .legend{list-style:none;padding:0;margin:0;flex:1;min-width:0}
+    .legend li{display:grid;grid-template-columns:9px 1fr auto;gap:8px;align-items:center;padding:4px 0;font-size:12px;color:#40504a}
+    .legend strong{font-variant-numeric:tabular-nums;font-weight:650;color:#273832}
+    .swatch{width:9px;height:9px;background:var(--swatch);display:inline-block;border-radius:2px}
+    .table-wrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+    th{background:var(--green);color:#fff;text-align:right;font-size:12px;font-weight:650;padding:9px 10px;white-space:nowrap}
+    th:first-child,td:first-child{text-align:left}
+    td{text-align:right;padding:8px 10px;border-bottom:1px solid #e8eeeb;white-space:nowrap}
+    tbody tr:last-child td{border-bottom:0}
+    tbody tr:hover{background:#f7faf8}
+    .rank{display:inline-block;width:27px;color:#81908a;font-size:11px}
+    .split-table th{white-space:normal}
+    .definition{margin:13px 0 0;padding:10px 12px;background:var(--green-soft);border-left:3px solid #85a99d;color:#44564f;font-size:12px}
+    .split-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px}
+    .mini-charts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+    .mini-charts .chart{min-width:0}
+    .mini-charts .chart figcaption{font-size:12px;min-height:38px}
+    .mini-charts .chart svg{width:46%;max-width:150px}
+    .mini-charts .legend li{font-size:11px;gap:5px}
+    footer{border-top:1px solid var(--line);margin-top:34px;padding-top:15px;color:var(--muted);font-size:11px}
+    @media(max-width:760px){main{padding:24px 16px 40px}h1{font-size:23px}.grid,.split-grid{grid-template-columns:1fr}.panel{padding:15px}.chart-body{gap:8px}.chart svg{width:40%}.section-head{display:block}.section-note{margin-top:4px}}
+    @media(max-width:480px){.mini-charts{grid-template-columns:1fr}.mini-charts .chart figcaption{min-height:0}}
+    @media print{body{background:#fff;font-size:12px}main{max-width:none;padding:10mm}.panel{break-inside:avoid;box-shadow:none}.grid{grid-template-columns:1.1fr .9fr}.split-grid{grid-template-columns:1fr 1fr}section{padding-top:18px}header{margin-bottom:12px}.chart svg{width:155px}footer{margin-top:20px}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>2026年政企部录音需求统计</h1>
+  </header>
+
+  <section>
+    <div class="section-head"><h2>整体分布</h2><p class="section-note">表格占比以全部 9,198 句为分母；录音师仅显示数量排名前 6</p></div>
+    <div class="grid">
+      <div class="panel">
+        <h3>录音师录音量</h3>
+        <div class="table-wrap"><table class=""><thead><tr><th>录音师</th><th>录音数量（句）</th><th>录音占比</th></tr></thead><tbody><tr><td><span class="rank">01</span>岚夕</td><td>3,447</td><td>37.5%</td></tr><tr><td><span class="rank">02</span>小半</td><td>2,252</td><td>24.5%</td></tr><tr><td><span class="rank">03</span>松松</td><td>1,890</td><td>20.5%</td></tr><tr><td><span class="rank">04</span>桦雪</td><td>462</td><td>5.0%</td></tr><tr><td><span class="rank">05</span>哈哈</td><td>376</td><td>4.1%</td></tr><tr><td><span class="rank">06</span>日夕</td><td>314</td><td>3.4%</td></tr></tbody></table></div>
+      </div>
+      <div class="panel"><figure class="chart" aria-label="录音师前 6 名构成（前 6 名合计）">
+    <figcaption>录音师前 6 名构成（前 6 名合计）</figcaption>
+    <div class="chart-body"><svg viewBox="0 0 208 208" role="img" aria-label="录音师前 6 名构成（前 6 名合计）饼图"><g><path d="M 104 104 L 104 22 A 82 82 0 0 1 154.52319630293576 168.58642764029466 Z" fill="#187A72" stroke="#fff" stroke-width="2"><title>岚夕: 3,447 句 (39.4%)</title></path><text class="pie-label" x="154.1072797423729" y="86.72977947970591"><tspan x="154.1072797423729" dy="-2">岚夕</tspan><tspan x="154.1072797423729" dy="12">39.4%</tspan></text></g><g><path d="M 104 104 L 154.52319630293576 168.58642764029466 A 82 82 0 0 1 37.064675536839275 151.36731298069796 Z" fill="#D68728" stroke="#fff" stroke-width="2"><title>小半: 2,252 句 (25.8%)</title></path><text class="pie-label" x="96.31250350791558" y="156.43951179868276"><tspan x="96.31250350791558" dy="-2">小半</tspan><tspan x="96.31250350791558" dy="12">25.8%</tspan></text></g><g><path d="M 104 104 L 37.064675536839275 151.36731298069796 A 82 82 0 0 1 43.596104444342885 48.543986785008904 Z" fill="#3478A5" stroke="#fff" stroke-width="2"><title>松松: 1,890 句 (21.6%)</title></path><text class="pie-label" x="51.106602442877346" y="100.64016445876115"><tspan x="51.106602442877346" dy="-2">松松</tspan><tspan x="51.106602442877346" dy="12">21.6%</tspan></text></g><g><path d="M 104 104 L 43.596104444342885 48.543986785008904 A 82 82 0 0 1 64.97640637575863 31.880937744240825 Z" fill="#C45749" stroke="#fff" stroke-width="2"><title>桦雪: 462 句 (5.3%)</title></path></g><g><path d="M 104 104 L 64.97640637575863 31.880937744240825 A 82 82 0 0 1 85.64863028365782 24.079869685203093 Z" fill="#7C6AA6" stroke="#fff" stroke-width="2"><title>哈哈: 376 句 (4.3%)</title></path></g><g><path d="M 104 104 L 85.64863028365782 24.079869685203093 A 82 82 0 0 1 103.99999999999999 22 Z" fill="#638B48" stroke="#fff" stroke-width="2"><title>日夕: 314 句 (3.6%)</title></path></g></svg><ul class="legend"><li><span class="swatch" style="--swatch:#187A72"></span><span>岚夕</span><strong>39.4%</strong></li><li><span class="swatch" style="--swatch:#D68728"></span><span>小半</span><strong>25.8%</strong></li><li><span class="swatch" style="--swatch:#3478A5"></span><span>松松</span><strong>21.6%</strong></li><li><span class="swatch" style="--swatch:#C45749"></span><span>桦雪</span><strong>5.3%</strong></li><li><span class="swatch" style="--swatch:#7C6AA6"></span><span>哈哈</span><strong>4.3%</strong></li><li><span class="swatch" style="--swatch:#638B48"></span><span>日夕</span><strong>3.6%</strong></li></ul></div>
+  </figure></div>
+      <div class="panel">
+        <h3>部署类型</h3>
+        <div class="table-wrap"><table class=""><thead><tr><th>部署类型</th><th>录音数量（句）</th><th>录音占比</th></tr></thead><tbody><tr><td>私有化</td><td>4,399</td><td>47.8%</td></tr><tr><td>SaaS</td><td>4,799</td><td>52.2%</td></tr></tbody></table></div>
+        <p class="definition">私有化仅按客户名称“公安saas测试账号”识别；其余客户均计为 SaaS。</p>
+      </div>
+      <div class="panel"><figure class="chart" aria-label="私有化与 SaaS 录音占比">
+    <figcaption>私有化与 SaaS 录音占比</figcaption>
+    <div class="chart-body"><svg viewBox="0 0 208 208" role="img" aria-label="私有化与 SaaS 录音占比饼图"><g><path d="M 104 104 L 104 22 A 82 82 0 0 1 115.16807794961892 185.23591591722982 Z" fill="#187A72" stroke="#fff" stroke-width="2"><title>私有化: 4,399 句 (47.8%)</title></path><text class="pie-label" x="156.8763910508075" y="100.38236687292898"><tspan x="156.8763910508075" dy="-2">私有化</tspan><tspan x="156.8763910508075" dy="12">47.8%</tspan></text></g><g><path d="M 104 104 L 115.16807794961892 185.23591591722982 A 82 82 0 1 1 103.99999999999999 22 Z" fill="#D68728" stroke="#fff" stroke-width="2"><title>SaaS: 4,799 句 (52.2%)</title></path><text class="pie-label" x="51.12360894919247" y="107.61763312707104"><tspan x="51.12360894919247" dy="-2">SaaS</tspan><tspan x="51.12360894919247" dy="12">52.2%</tspan></text></g></svg><ul class="legend"><li><span class="swatch" style="--swatch:#187A72"></span><span>私有化</span><strong>47.8%</strong></li><li><span class="swatch" style="--swatch:#D68728"></span><span>SaaS</span><strong>52.2%</strong></li></ul></div>
+  </figure></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>补录与全新</h2><p class="section-note">录音师仅显示数量排名前 6；占比以对应录音类型总句数为分母</p></div>
+    <div class="grid">
+      <div class="panel">
+        <h3>录音类型总量</h3>
+        <div class="table-wrap"><table class=""><thead><tr><th>录音类型</th><th>录音数量（句）</th><th>占总录音量</th></tr></thead><tbody><tr><td>补录</td><td>6,397</td><td>69.5%</td></tr><tr><td>全新</td><td>2,801</td><td>30.5%</td></tr></tbody></table></div>
+      </div>
+      <div class="panel"><figure class="chart" aria-label="补录与全新录音占比">
+    <figcaption>补录与全新录音占比</figcaption>
+    <div class="chart-body"><svg viewBox="0 0 208 208" role="img" aria-label="补录与全新录音占比饼图"><g><path d="M 104 104 L 104 22 A 82 82 0 1 1 26.764827118961946 131.5450189696098 Z" fill="#187A72" stroke="#fff" stroke-width="2"><title>补录: 6,397 句 (69.5%)</title></path><text class="pie-label" x="147.31619129806936" y="134.54026148265697"><tspan x="147.31619129806936" dy="-2">补录</tspan><tspan x="147.31619129806936" dy="12">69.5%</tspan></text></g><g><path d="M 104 104 L 26.764827118961946 131.5450189696098 A 82 82 0 0 1 103.99999999999999 22 Z" fill="#D68728" stroke="#fff" stroke-width="2"><title>全新: 2,801 句 (30.5%)</title></path><text class="pie-label" x="60.683808701930644" y="73.45973851734303"><tspan x="60.683808701930644" dy="-2">全新</tspan><tspan x="60.683808701930644" dy="12">30.5%</tspan></text></g></svg><ul class="legend"><li><span class="swatch" style="--swatch:#187A72"></span><span>补录</span><strong>69.5%</strong></li><li><span class="swatch" style="--swatch:#D68728"></span><span>全新</span><strong>30.5%</strong></li></ul></div>
+  </figure></div>
+    </div>
+    <div class="split-grid" style="margin-top:22px">
+      <div class="panel">
+        <h3>各录音师按类型拆分</h3>
+        <div class="table-wrap"><table class="split-table"><thead><tr><th>录音师</th><th>补录（句）</th><th>占补录总量</th><th>全新（句）</th><th>占全新总量</th></tr></thead><tbody><tr><td>岚夕</td><td>2,572</td><td>40.2%</td><td>875</td><td>31.2%</td></tr><tr><td>小半</td><td>1,598</td><td>25.0%</td><td>654</td><td>23.3%</td></tr><tr><td>松松</td><td>1,651</td><td>25.8%</td><td>239</td><td>8.5%</td></tr><tr><td>桦雪</td><td>295</td><td>4.6%</td><td>167</td><td>6.0%</td></tr><tr><td>哈哈</td><td>139</td><td>2.2%</td><td>237</td><td>8.5%</td></tr><tr><td>日夕</td><td>126</td><td>2.0%</td><td>188</td><td>6.7%</td></tr></tbody></table></div>
+        <div class="mini-charts">
+          <figure class="chart" aria-label="补录句数构成（前 6 名内部）">
+    <figcaption>补录句数构成（前 6 名内部）</figcaption>
+    <div class="chart-body"><svg viewBox="0 0 208 208" role="img" aria-label="补录句数构成（前 6 名内部）饼图"><g><path d="M 104 104 L 104 22 A 82 82 0 0 1 150.90917367600974 171.25718864949647 Z" fill="#187A72" stroke="#fff" stroke-width="2"><title>岚夕: 2,572 句 (40.3%)</title></path><text class="pie-label" x="154.56168913344416" y="88.1092608109958"><tspan x="154.56168913344416" dy="-2">岚夕</tspan><tspan x="154.56168913344416" dy="12">40.3%</tspan></text></g><g><path d="M 104 104 L 150.90917367600974 171.25718864949647 A 82 82 0 0 1 36.61603530856337 150.7268798708326 Z" fill="#D68728" stroke="#fff" stroke-width="2"><title>小半: 1,598 句 (25.0%)</title></path><text class="pie-label" x="94.62966117521877" y="156.16509129972647"><tspan x="94.62966117521877" dy="-2">小半</tspan><tspan x="94.62966117521877" dy="12">25.0%</tspan></text></g><g><path d="M 104 104 L 36.61603530856337 150.7268798708326 A 82 82 0 0 1 61.040720772789655 34.153737907611884 Z" fill="#3478A5" stroke="#fff" stroke-width="2"><title>松松: 1,651 句 (25.9%)</title></path><text class="pie-label" x="52.12638722853561" y="93.1313157173388"><tspan x="52.12638722853561" dy="-2">松松</tspan><tspan x="52.12638722853561" dy="12">25.9%</tspan></text></g><g><path d="M 104 104 L 61.040720772789655 34.153737907611884 A 82 82 0 0 1 82.84508896569666 24.775826043241636 Z" fill="#C45749" stroke="#fff" stroke-width="2"><title>桦雪: 295 句 (4.6%)</title></path></g><g><path d="M 104 104 L 82.84508896569666 24.775826043241636 A 82 82 0 0 1 93.85246013064092 22.630303954114666 Z" fill="#7C6AA6" stroke="#fff" stroke-width="2"><title>哈哈: 139 句 (2.2%)</title></path></g><g><path d="M 104 104 L 93.85246013064092 22.630303954114666 A 82 82 0 0 1 104.00000000000006 22 Z" fill="#638B48" stroke="#fff" stroke-width="2"><title>日夕: 126 句 (2.0%)</title></path></g></svg><ul class="legend"><li><span class="swatch" style="--swatch:#187A72"></span><span>岚夕</span><strong>40.3%</strong></li><li><span class="swatch" style="--swatch:#D68728"></span><span>小半</span><strong>25.0%</strong></li><li><span class="swatch" style="--swatch:#3478A5"></span><span>松松</span><strong>25.9%</strong></li><li><span class="swatch" style="--swatch:#C45749"></span><span>桦雪</span><strong>4.6%</strong></li><li><span class="swatch" style="--swatch:#7C6AA6"></span><span>哈哈</span><strong>2.2%</strong></li><li><span class="swatch" style="--swatch:#638B48"></span><span>日夕</span><strong>2.0%</strong></li></ul></div>
+  </figure>
+          <figure class="chart" aria-label="全新句数构成（前 6 名内部）">
+    <figcaption>全新句数构成（前 6 名内部）</figcaption>
+    <div class="chart-body"><svg viewBox="0 0 208 208" role="img" aria-label="全新句数构成（前 6 名内部）饼图"><g><path d="M 104 104 L 104 22 A 82 82 0 0 1 163.50573881416315 160.4186764128741 Z" fill="#187A72" stroke="#fff" stroke-width="2"><title>岚夕: 875 句 (37.1%)</title></path><text class="pie-label" x="152.6912912308789" y="83.06777225736029"><tspan x="152.6912912308789" dy="-2">岚夕</tspan><tspan x="152.6912912308789" dy="12">37.1%</tspan></text></g><g><path d="M 104 104 L 163.50573881416315 160.4186764128741 A 82 82 0 0 1 38.308074199323826 153.0771931206182 Z" fill="#D68728" stroke="#fff" stroke-width="2"><title>小半: 654 句 (27.7%)</title></path><text class="pie-label" x="100.89745516656025" y="156.90911278368307"><tspan x="100.89745516656025" dy="-2">小半</tspan><tspan x="100.89745516656025" dy="12">27.7%</tspan></text></g><g><path d="M 104 104 L 38.308074199323826 153.0771931206182 A 82 82 0 0 1 22.001162461431647 104.43662606824822 Z" fill="#3478A5" stroke="#fff" stroke-width="2"><title>松松: 239 句 (10.1%)</title></path><text class="pie-label" x="53.74880471691315" y="120.84688020439008"><tspan x="53.74880471691315" dy="-2">松松</tspan><tspan x="53.74880471691315" dy="12">10.1%</tspan></text></g><g><path d="M 104 104 L 22.001162461431647 104.43662606824822 A 82 82 0 0 1 29.78560149530358 69.12561033385511 Z" fill="#C45749" stroke="#fff" stroke-width="2"><title>桦雪: 167 句 (7.1%)</title></path></g><g><path d="M 104 104 L 29.78560149530358 69.12561033385511 A 82 82 0 0 1 64.64933627066901 32.05887640534718 Z" fill="#7C6AA6" stroke="#fff" stroke-width="2"><title>哈哈: 237 句 (10.0%)</title></path><text class="pie-label" x="65.39365306173693" y="67.6881565314777"><tspan x="65.39365306173693" dy="-2">哈哈</tspan><tspan x="65.39365306173693" dy="12">10.0%</tspan></text></g><g><path d="M 104 104 L 64.64933627066901 32.05887640534718 A 82 82 0 0 1 103.99999999999999 22 Z" fill="#638B48" stroke="#fff" stroke-width="2"><title>日夕: 188 句 (8.0%)</title></path></g></svg><ul class="legend"><li><span class="swatch" style="--swatch:#187A72"></span><span>岚夕</span><strong>37.1%</strong></li><li><span class="swatch" style="--swatch:#D68728"></span><span>小半</span><strong>27.7%</strong></li><li><span class="swatch" style="--swatch:#3478A5"></span><span>松松</span><strong>10.1%</strong></li><li><span class="swatch" style="--swatch:#C45749"></span><span>桦雪</span><strong>7.1%</strong></li><li><span class="swatch" style="--swatch:#7C6AA6"></span><span>哈哈</span><strong>10.0%</strong></li><li><span class="swatch" style="--swatch:#638B48"></span><span>日夕</span><strong>8.0%</strong></li></ul></div>
+  </figure>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>部署类型按录音类型拆分</h3>
+        <div class="table-wrap"><table class="split-table"><thead><tr><th>部署类型</th><th>补录（句）</th><th>占补录总量</th><th>全新（句）</th><th>占全新总量</th></tr></thead><tbody><tr><td>私有化</td><td>3,151</td><td>49.3%</td><td>1,248</td><td>44.6%</td></tr><tr><td>SaaS</td><td>3,246</td><td>50.7%</td><td>1,553</td><td>55.4%</td></tr></tbody></table></div>
+        <div class="mini-charts">
+          <figure class="chart" aria-label="补录：私有化与 SaaS">
+    <figcaption>补录：私有化与 SaaS</figcaption>
+    <div class="chart-body"><svg viewBox="0 0 208 208" role="img" aria-label="补录：私有化与 SaaS饼图"><g><path d="M 104 104 L 104 22 A 82 82 0 0 1 107.82431286963777 185.910772375037 Z" fill="#187A72" stroke="#fff" stroke-width="2"><title>私有化: 3,151 句 (49.3%)</title></path><text class="pie-label" x="156.98558015995548" y="102.76375766415582"><tspan x="156.98558015995548" dy="-2">私有化</tspan><tspan x="156.98558015995548" dy="12">49.3%</tspan></text></g><g><path d="M 104 104 L 107.82431286963777 185.910772375037 A 82 82 0 1 1 103.99999999999999 22 Z" fill="#D68728" stroke="#fff" stroke-width="2"><title>SaaS: 3,246 句 (50.7%)</title></path><text class="pie-label" x="51.01441984004453" y="105.23624233584418"><tspan x="51.01441984004453" dy="-2">SaaS</tspan><tspan x="51.01441984004453" dy="12">50.7%</tspan></text></g></svg><ul class="legend"><li><span class="swatch" style="--swatch:#187A72"></span><span>私有化</span><strong>49.3%</strong></li><li><span class="swatch" style="--swatch:#D68728"></span><span>SaaS</span><strong>50.7%</strong></li></ul></div>
+  </figure>
+          <figure class="chart" aria-label="全新：私有化与 SaaS">
+    <figcaption>全新：私有化与 SaaS</figcaption>
+    <div class="chart-body"><svg viewBox="0 0 208 208" role="img" aria-label="全新：私有化与 SaaS饼图"><g><path d="M 104 104 L 104 22 A 82 82 0 0 1 131.50722125700807 181.2486425687727 Z" fill="#187A72" stroke="#fff" stroke-width="2"><title>私有化: 1,248 句 (44.6%)</title></path><text class="pie-label" x="156.22660737731684" y="94.9788314584199"><tspan x="156.22660737731684" dy="-2">私有化</tspan><tspan x="156.22660737731684" dy="12">44.6%</tspan></text></g><g><path d="M 104 104 L 131.50722125700807 181.2486425687727 A 82 82 0 1 1 103.99999999999999 22 Z" fill="#D68728" stroke="#fff" stroke-width="2"><title>SaaS: 1,553 句 (55.4%)</title></path><text class="pie-label" x="51.773392622683154" y="113.02116854158008"><tspan x="51.773392622683154" dy="-2">SaaS</tspan><tspan x="51.773392622683154" dy="12">55.4%</tspan></text></g></svg><ul class="legend"><li><span class="swatch" style="--swatch:#187A72"></span><span>私有化</span><strong>44.6%</strong></li><li><span class="swatch" style="--swatch:#D68728"></span><span>SaaS</span><strong>55.4%</strong></li></ul></div>
+  </figure>
+        </div>
+      </div>
+    </div>
+    <p class="definition">各录音师和部署类型的“占补录总量”“占全新总量”，分别以全部补录句数和全部全新句数为分母。部署类型分类沿用上方规则。</p>
+  </section>
+
+  <footer>数据来源：政务录音数据-2026.xlsx。统计基于文件中的 1,269 条明细。</footer>
+</main>
+</body>
+</html>
